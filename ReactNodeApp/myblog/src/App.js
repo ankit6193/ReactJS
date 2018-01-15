@@ -11,10 +11,11 @@ class App extends Component {
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.signIn = this.signIn.bind(this);
+    
     this.state = {
       login:" ",
       pass:" ",
-      loginmessage:"Logging in "
+      loginmessage:" Logging In  "
     };
   } 
 
@@ -25,7 +26,7 @@ class App extends Component {
       this.setState({pass:e.target.value})
   }
   
-  signIn(){
+  signIn(e){
     var app = this;
     axios.post('/signin', {
       email: this.state.login,
@@ -33,26 +34,25 @@ class App extends Component {
     })
     .then(function (response) {
       console.log(response);
-      app.setState({loginmessage:"Logged In"})
+      app.setState({loginmessage:"LOGGED IN"})
     })
     .catch(function (error) {
       console.log(error);
       app.setState({loginmessage:"Failed"})
-    });         
+    });        
+    
+    e.preventDefault();
   }
   
   render() {
     return (
-      
       <div>
-      
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Sign in to your blog</h1>
         </header>
       </div>
-
       <div className= "Login-div"> 
           <Form className="form-class">
               <TextInput
