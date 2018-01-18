@@ -5,17 +5,16 @@ import 'carbon-components/css/carbon-components.css'
 import {Form, TextInput,Button} from 'carbon-components-react'
 import axios from 'axios'
 
-class App extends Component {
+class SignIn extends Component {
   constructor(props) {
     super(props);
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.signIn = this.signIn.bind(this);
-    
     this.state = {
       login:" ",
       pass:" ",
-      loginmessage:" Logging In  "
+      loginmessage:"Logging in "
     };
   } 
 
@@ -34,25 +33,27 @@ class App extends Component {
     })
     .then(function (response) {
       console.log(response);
-      app.setState({loginmessage:"LOGGED IN"})
+      app.setState({loginmessage:"Logged In"})
     })
     .catch(function (error) {
       console.log(error);
       app.setState({loginmessage:"Failed"})
-    });        
-    
-    e.preventDefault();
+    });       
+    e.preventDefault();  
   }
   
   render() {
     return (
+      
       <div>
+      
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Sign in to your blog</h1>
         </header>
       </div>
+
       <div className= "Login-div"> 
           <Form className="form-class">
               <TextInput
@@ -83,4 +84,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default SignIn;
