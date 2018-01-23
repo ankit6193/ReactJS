@@ -1,0 +1,12 @@
+.tile--title{
+    min-height: 64px;
+    font-size: 200%;
+}
+
+.left--title{
+    float: left;
+}
+
+.right--title{
+    float: right;
+}
