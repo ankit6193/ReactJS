@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
+import {Link,withRouter} from 'react-router-dom';
 import './login.css';
 
 import 'carbon-components/css/carbon-components.css'
 import {Footer,TextInput,Button} from 'carbon-components-react'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import AppBar from 'material-ui/AppBar';
+import FlatButton from 'material-ui/FlatButton';
 
 
 class SignIn extends React.Component {
@@ -19,13 +22,14 @@ class SignIn extends React.Component {
       };
     }
     signIn(){
+      var self = this;
       axios.post('/signin', {
-        email: this.state.email,
-        password: this.state.password
+        email: self.state.email,
+        password: self.state.password
       })
       .then(function (response) {
         if(response.data == 'success'){
-          window.location.assign('http://localhost:7777/home')
+          self.props.history.push("/edit");
         }
       })
       .catch(function (error) {
@@ -41,7 +45,12 @@ class SignIn extends React.Component {
     render() {
       return (
         <div>
-
+          <MuiThemeProvider>
+                <AppBar 
+                 title="React Blog App"
+                 iconElementRight={<FlatButton href = "/home" label="Home" />}
+                />
+          </MuiThemeProvider>
           <h2>Please Sign In </h2>
           <form className="form-signin">
           <TextInput
@@ -81,4 +90,4 @@ class SignIn extends React.Component {
     }
 }
 
-export default SignIn;
+export default withRouter(SignIn);

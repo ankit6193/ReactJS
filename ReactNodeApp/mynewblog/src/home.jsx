@@ -3,17 +3,25 @@ import axios from 'axios'
 import {Link} from 'react-router-dom';
 import './home.css';
 
-import 'carbon-components/css/carbon-components.css'
-import {Footer} from 'carbon-components-react'
+import 'carbon-components/css/carbon-components.css';
+import {Footer} from 'carbon-components-react';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
+import AppBar from 'material-ui/AppBar';
+import FlatButton from 'material-ui/FlatButton';
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+
+import headerImage from '../src/header.jpeg';
 
 class ShowPost extends React.Component{
     constructor(props){
         super(props);
-        this.updatePost = this.updatePost.bind(this);
-        this.deletePost = this.deletePost.bind(this);
         this.state = {
-            posts: []
+            posts: [],
+            expanded: false,
         };
+
+        
     }
 
     handleClick(){
@@ -35,87 +43,62 @@ class ShowPost extends React.Component{
         });
     }
 
-    updatePost(id){
-        console.log('Inside Update Post');
-       // hashHistory.push('/addPost/' + id);
-    }
-
-    deletePost(id){
-        // if(confirm('Do you want to delete this post ?')){
-        //     var self = this;
-        //     axios.post('/deletePost',{
-        //         id : id
-        //     })
-        //     .then(function(response) {
-        //         self.getPost();
-        //     })
-        //     .catch(function (error) {
-        //         console.log('error is ',error);
-        //     });
-        // }
-    }
     componentDidMount(){
         this.getPost();
-        // document.getElementById('homeHyperlink').className = "active";
-        // document.getElementById('addHyperLink').className = "";
     }
+
+  
+
     render(){
         return( 
+           <main>
             
-             <div class="container">
+            <MuiThemeProvider>
+                <AppBar 
+                 title="React Blog App"
+                 iconElementRight={<FlatButton href = "/login" label="Login" />}
+                />
+            </MuiThemeProvider>
 
-        
-            <div class="bx--tile">
-                <div class= "head--title">
-                    <div class="left--title">
-                        React Blog App
-                    </div>
-                    <div class="right--title">
-                            <a href="/login" class="bx--link">Login</a>
-                    </div>     
-                </div>
-            </div>
-
-            <div class="header clearfix">
-                <nav>
-                    <ul class="nav nav-pills pull-right">
-                
-                        <li role="presentation"><a href="/home#/addPost">Add</a></li>
-                    
-                    </ul>
-                </nav>
-                
-            </div>
-
-
-
-
-
+             <div>
             <div>
+            
                {this.state.posts.map(function(post,index){
-                  return <div class="bx--module bx--module--double">
-                            <div class="bx--module__inner">
-                                <div class="bx--module__header">
-                                     <p class="bx--module__title bx--type-alpha"> {post.title}</p>
-                                 </div>
-                             <div class="bx--module__content">
-                                  <p>
-                                      {post.subject}
-                                  </p>
-                            </div>
-                            </div>
+                  return <div>
+                            <MuiThemeProvider>
+                            <Card 
+                             className = 'card'
+                            >
+
+                            <CardHeader
+                            title="Ankit"
+                            subtitle="IBM India Software Labs Intern"
+                            avatar={headerImage}
+                            />
+                            <CardMedia
+                            overlay={<CardTitle title="Overlay title" subtitle="Overlay subtitle" />}
+                            >
+                            <img src={headerImage} />
+                            
+                            </CardMedia>
+                            <CardTitle title={post.title} subtitle="Card subtitle" />
+                                <CardText>
+                                    {post.subject}
+                                </CardText>
+                            <CardActions>
+                            <FlatButton label="Expand"  />
+                            <FlatButton label="Collapse" />
+                            </CardActions>
+                               
+                            </Card>
+                            </MuiThemeProvider>
                             </div>
               }.bind(this))
             }
             </div>
-            
-            <div>
-            <Footer className="some-class">
-                    &copy; 2018 Ankit, Inc.
-            </Footer>
-            </div>
 
         </div>
+        </main>
         )
     }
 }

@@ -10,3 +10,15 @@
 .right--title{
     float: right;
 }
+
+.card-title{
+    font-size: 300%;
+}
+
+.card{
+    width: 80%;
+    margin: auto;
+    margin-top: 2%
+}
+
+

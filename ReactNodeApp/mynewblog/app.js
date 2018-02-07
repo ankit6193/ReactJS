@@ -1,11 +1,11 @@
 var express = require("express");
 var path = require("path");
 var bodyParser = require("body-parser");
-var session = require("express-session")
+var session = require('express-session');
 var post = require('./post')
 
 var app = express();
-app.use(express.static(path.join(__dirname,"/src")));
+//app.use(express.static(path.join(__dirname,"/src")));
 var user = require('./user')
 app.use(bodyParser.json());
 
@@ -32,6 +32,35 @@ app.post('/getPostWithId', function(req,res){
     post.getPostWithId(id, function(result){
       res.send(result)
     })
+})
+
+app.post('/addPost', function (req, res) {
+  var overlayTitle = req.body.overlayTitle;
+  var overlaySubtitle = req.body.overlaySubtitle;
+  var cardTitle = req.body.cardTitle;
+  var cardSubtitle = req.body.cardSubtitle;
+  var subject = req.body.subject;
+  var blogDate = req.body.blogDate;
+  var id  = req.body.id;
+
+  if(id == '' || id == undefined){
+    console.log('add');
+    post.addPost(overlayTitle,overlaySubtitle,cardTitle,cardSubtitle,subject,blogDate,function(result){
+      res.send(result);
+    }); 
+  }else{
+    console.log('update',title,subject);
+    post.updatePost(id,overlayTitle,overlaySubtitle,cardTitle,cardSubtitle,subject,blogDate,function(result){
+      res.send(result);
+    }); 
+  }
+})
+
+app.post('/deletePost',function(req,res){
+  var id = req.body.id;
+  post.deletePost(id,function(result){
+    res.send(result);
+  });
 })
 
 app.post('/signin', function (req, res) {
