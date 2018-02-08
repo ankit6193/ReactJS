@@ -10,7 +10,6 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-
 import headerImage from '../src/header.jpeg';
 
 class ShowPost extends React.Component{
@@ -56,6 +55,7 @@ class ShowPost extends React.Component{
             <MuiThemeProvider>
                 <AppBar 
                  title="React Blog App"
+                 iconElementRight
                  iconElementRight={<FlatButton href = "/login" label="Login" />}
                 />
             </MuiThemeProvider>
@@ -66,31 +66,37 @@ class ShowPost extends React.Component{
                {this.state.posts.map(function(post,index){
                   return <div>
                             <MuiThemeProvider>
-                            <Card 
-                             className = 'card'
-                            >
+                                
+                                    <Card 
+                                    className = 'card'
+                                    >
 
-                            <CardHeader
-                            title="Ankit"
-                            subtitle="IBM India Software Labs Intern"
-                            avatar={headerImage}
-                            />
-                            <CardMedia
-                            overlay={<CardTitle title="Overlay title" subtitle="Overlay subtitle" />}
-                            >
-                            <img src={headerImage} />
-                            
-                            </CardMedia>
-                            <CardTitle title={post.title} subtitle="Card subtitle" />
-                                <CardText>
-                                    {post.subject}
-                                </CardText>
-                            <CardActions>
-                            <FlatButton label="Expand"  />
-                            <FlatButton label="Collapse" />
-                            </CardActions>
-                               
-                            </Card>
+                                    <CardHeader
+                                    title="Ankit"
+                                    subtitle="IBM India Software Labs Intern"
+                                    avatar={headerImage}
+                                    actAsExpander={true}
+                                    showExpandableButton={true}
+                                    />
+                                    <CardMedia
+                                    overlay={<CardTitle title={post.overlayTitle} subtitle={post.overlaySubtitle} />}
+                                    >
+                                    <img src={headerImage} />
+                                    
+                                    </CardMedia>
+                                    <CardTitle  title={post.cardTitle} subtitle={post.cardSubtitle} />
+                                        <CardText expandable={true} >
+                                            {post.subject}
+                                        </CardText>
+                                    <CardActions>
+                                    <FlatButton label="Read"  />
+                                    <FlatButton label={post.blogDate} />
+                                    </CardActions>
+                                    
+                                    </Card>
+                                
+
+                                
                             </MuiThemeProvider>
                             </div>
               }.bind(this))

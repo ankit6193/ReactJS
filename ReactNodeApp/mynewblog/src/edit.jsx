@@ -58,12 +58,12 @@ class EditPost extends React.Component{
     render(){
         return( 
             
-             <div class="container">
+             <div className="container">
 
         
-            <div class="bx--tile">
-                <div class= "head--title">
-                    <div class="left--title">
+            <div className="bx--tile">
+                <div className= "head--title">
+                    <div classNam="left--title">
                         React Blog App
                     </div>
                     <div class="right--title">
@@ -88,7 +88,7 @@ class EditPost extends React.Component{
                {this.state.posts.map(function(post,index){
                   return <TableRow key={index} >
                             <TableData> {index+1} </TableData>
-                            <TableData> {post.title} </TableData>
+                            <TableData> {post.cardTitle} </TableData>
                             <TableData> {post.subject} </TableData>
                             <TableData><Button onClick={this.updatePost.bind(this,post._id)}> Edit </Button></TableData>
                             <TableData><Button onClick={this.deletePost.bind(this,post._id)}> Delete </Button></TableData>

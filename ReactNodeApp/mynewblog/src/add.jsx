@@ -9,7 +9,7 @@ import {TextArea,TextInput,Footer,Card, Table,TableHeader, TableRow,Tab, TableDa
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
-import DatePicker from 'material-ui/DatePicker'
+import DatePicker from 'material-ui/DatePicker';
 
 
 class AddPost extends React.Component{
@@ -59,8 +59,9 @@ class AddPost extends React.Component{
           overlayTitle : this.state.overlayTitle,
           overlaySubtitle : this.state.overlaySubtitle,
           cardTitle : this.state.cardTitle,
-          cardSubtitle : this.cardSubtitle,
+          cardSubtitle : this.state.cardSubtitle,
           subject: this.state.subject,
+          blogDate : this.state.blogDate
         })
         .then(function (response) {
           console.log('response from add post is ',response);
@@ -91,6 +92,10 @@ class AddPost extends React.Component{
        
         this.setState({subject:e.target.value})
     }
+
+    handleBlogDateChange = (event,date) => {
+        this.setState({blogDate : date});
+    }
     
     render(){
         console.log('State - ' + JSON.stringify(this.state))
@@ -113,7 +118,7 @@ class AddPost extends React.Component{
                     labelText="Overlay Title"
                     onChange={this.handleOverlayTitleChange}
                     placeholder="Add Card Title here"
-                    value={this.state.title} 
+                    //value={this.state.title} 
                     required
                     />
 
@@ -123,7 +128,7 @@ class AddPost extends React.Component{
                     labelText="Overlay Subtitle"
                     onChange={this.handleOverlaySubtitleChange}
                     placeholder="Add Card Subtitle here"
-                    value={this.state.title} 
+                    //value={this.state.title} 
                     required
                     />   
                     <TextInput
@@ -132,7 +137,7 @@ class AddPost extends React.Component{
                     labelText="Card Title"
                     onChange={this.handleCardTitleChange}
                     placeholder="Add Card Title here"
-                    value={this.state.title} 
+                    //value={this.state.title} 
                     required
                     />
 
@@ -142,7 +147,7 @@ class AddPost extends React.Component{
                     labelText="Card Subtitle"
                     onChange={this.handleCardSubtitleChange}
                     placeholder="Add Card Subtitle here"
-                    value={this.state.title} 
+                    //value={this.state.title} 
                     required
                     />     
 
@@ -152,19 +157,21 @@ class AddPost extends React.Component{
                     onChange={this.handleSubjectChange}
                     placeholder="Add Subject here"
                     id="test2"
-                    value={this.state.subject}
+                    //value={this.state.subject}
                     onChange={this.handleSubjectChange}
                     required
                     />
 
-                    <DatePicker hintText="Portrait Inline Dialog" container="inline" />
+                    <DatePicker 
+                    onChange = {this.handleBlogDateChange}
+                    container="inline" />
 
                     <Button
                     onClick={this.addPost}
                     id="submit"
                     name="submit"
                     >
-                    Update
+                    Add
                     </Button>
 
                 </div>
