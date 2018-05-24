@@ -15,8 +15,8 @@ Home page of artist will show you several information about the albums and relea
 ## How to start the App ?
 
 - Clone the repo
-- Run '''npm install''' to install all packages required to run this app.
-- Run '''npm start''' this will start the app in local server.
+- Run 'npm install' to install all packages required to run this app.
+- Run 'npm start' this will start the app in local server.
 
 ## Project Hierarchy 
 
@@ -31,3 +31,7 @@ Majority of components are used from Google Material UI design (https://material
 ## Comments and Explaination
 
 Most of the code is commented with the use where ever possible
+
+## Future Scope
+
+Styling option like progress bar and animations have been skipped and can be added in most of the places.
