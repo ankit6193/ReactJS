@@ -2,32 +2,66 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
+
 const styles = {
- 
+  container : {
+    display : 'flex'
+  },
   cover : {
-    width: 150,
-    height: 150,
+    marginTop : 10,
+    marginLeft : 10,
+    height : 300,
+    width : 300
   },
   img : {
     maxWidth : "100%",
     maxHeight : "100%"
+  },
+  coverRight : {
+    marginTop : 10,
+    marginLeft : 10,
+    marginRight : 10,
+    height : 300,
+    flex : 1,
+    
   }
 };
 
 function ArtistHomePageTopCard(props) {
   const { classes } = props;
   return (
-    <div>
+    <div className = {classes.container}>
     
       <Card className={classes.cover}>
         <img className = {classes.img} alt="" src= {props.imgURL}  />
       </Card>
+
+      
+      <Card className={classes.coverRight}>
+
+            <div className={classes.details}>
+            <CardContent className={classes.content}>
+                <Typography variant="display2">{props.name}</Typography>
+
+                <Typography variant="caption" color="textSecondary">
+                   Genre - {props.genre}
+                </Typography>
+                <Typography variant="caption" color="textSecondary">
+                    Followers - {9999}
+                </Typography>
+
+                
+            </CardContent>
+            </div>
+                            
+                            
+        </Card>
+     
+
+      
     </div>
   );
 }

@@ -9,40 +9,17 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableHead from '@material-ui/core/TableHead';
 import Paper from '@material-ui/core/Paper';
-import IconButton from '@material-ui/core/IconButton';
-import FirstPageIcon from '@material-ui/icons/FirstPage';
-import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
-import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
-import LastPageIcon from '@material-ui/icons/LastPage';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import withMobileDialog from '@material-ui/core/withMobileDialog';
 import axios from "axios";
 import CardMedia from '@material-ui/core/CardMedia';
-
-import CardContent from '@material-ui/core/CardContent';
-
+import {TablePaginationActionsWrapped} from './ConstantFunctions/TablePaginationActions';
 import Typography from '@material-ui/core/Typography';
-
-const song_search_url = "http://www.theaudiodb.com/api/v1/json/1/track.php?m="
-
-function millisToMinutesAndSeconds(millis) {
-  var minutes = Math.floor(millis / 60000);
-  var seconds = ((millis % 60000) / 1000).toFixed(0);
-  return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
-}
-
-const actionsStyles = theme => ({
-  root: {
-    flexShrink: 0,
-    color: theme.palette.text.secondary,
-    marginLeft: theme.spacing.unit * 2.5,
-  },
-});
+import config from './ConstantFunctions/config';
+import {millisToMinutesAndSeconds} from './ConstantFunctions/MStoMinutesSeconds'
 
 
 const CustomTableCell = withStyles(theme => ({
@@ -54,83 +31,6 @@ const CustomTableCell = withStyles(theme => ({
     fontSize: 14,
   },
 }))(TableCell);
-
-class TablePaginationActions extends React.Component {
-  handleFirstPageButtonClick = event => {
-    this.props.onChangePage(event, 0);
-  };
-
-  handleBackButtonClick = event => {
-    this.props.onChangePage(event, this.props.page - 1);
-  };
-
-  handleNextButtonClick = event => {
-    this.props.onChangePage(event, this.props.page + 1);
-  };
-
-  handleLastPageButtonClick = event => {
-    this.props.onChangePage(
-      event,
-      Math.max(0, Math.ceil(this.props.count / this.props.rowsPerPage) - 1),
-    );
-  };
-
-  render() {
-    const { classes, count, page, rowsPerPage, theme } = this.props;
-
-    return (
-      <div className={classes.root}>
-        <IconButton
-          onClick={this.handleFirstPageButtonClick}
-          disabled={page === 0}
-          aria-label="First Page"
-        >
-          {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
-        </IconButton>
-        <IconButton
-          onClick={this.handleBackButtonClick}
-          disabled={page === 0}
-          aria-label="Previous Page"
-        >
-          {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
-        </IconButton>
-        <IconButton
-          onClick={this.handleNextButtonClick}
-          disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-          aria-label="Next Page"
-        >
-          {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
-        </IconButton>
-        <IconButton
-          onClick={this.handleLastPageButtonClick}
-          disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-          aria-label="Last Page"
-        >
-          {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
-        </IconButton>
-      </div>
-    );
-  }
-}
-
-TablePaginationActions.propTypes = {
-  classes: PropTypes.object.isRequired,
-  count: PropTypes.number.isRequired,
-  onChangePage: PropTypes.func.isRequired,
-  page: PropTypes.number.isRequired,
-  rowsPerPage: PropTypes.number.isRequired,
-  theme: PropTypes.object.isRequired,
-};
-
-const TablePaginationActionsWrapped = withStyles(actionsStyles, { withTheme: true })(
-  TablePaginationActions,
-);
-
-let counter = 0;
-function createData(name, calories, fat) {
-  counter += 1;
-  return { id: counter, name, calories, fat };
-}
 
 const styles = theme => ({
 
@@ -163,7 +63,7 @@ const styles = theme => ({
   },
   album : {
       flex : 1
-  }
+  },
 });
 
 
@@ -199,7 +99,7 @@ class AlbumCards extends Component{
         self.setState({songs_data : ""});
         self.setState({selected_album_art : img})
         self.setState({selected_album_date : date})
-        axios.get(song_search_url + id)
+        axios.get(config.song_search_url + id)
         .then(function (response) {
             console.log(response);
             self.setState({songs_data : response.data.track});
@@ -258,7 +158,7 @@ class AlbumCards extends Component{
                                                 <div className = {classes.container}> 
                                                          <CardMedia
                                                             className={classes.cover}
-                                                            title="Live from space album cover"
+                                            
                                                         >
 
                                                         <img className = {classes.img} alt="" src= {this.state.selected_album_art} />
@@ -290,7 +190,7 @@ class AlbumCards extends Component{
                                                             return (
                                                             <TableRow key={n.idTrack}>
                                                                 <TableCell component="th" scope="row">
-                                                                {n.strTrack}
+                                                                    {n.strTrack}
                                                                 </TableCell>
                                                                 <TableCell numeric>{millisToMinutesAndSeconds(n.intDuration)}</TableCell>
                                                             </TableRow>

@@ -5,10 +5,8 @@ import './HomePage.css';
 import axios from 'axios';
 import ArtistCard from './ArtistCard';
 import Button from '@material-ui/core/Button';
-
-const artist_search_url = "http://www.theaudiodb.com/api/v1/json/1/search.php?s=";
-
-
+import ButtonAppBar from './ConstantFunctions/AppBar';
+import config from './ConstantFunctions/config';
 
 
 class HomePage extends Component {
@@ -30,8 +28,8 @@ class HomePage extends Component {
     onSearchClicked = () => {
 
         var self = this;
-
-        axios.get(artist_search_url + self.state.searchText)
+        self.setState({data : ""})
+        axios.get(config.artist_search_url + self.state.searchText)
         .then(function (response) {
             console.log(response);
             self.setState({data : response.data.artists})
@@ -45,7 +43,7 @@ class HomePage extends Component {
     render(){
         return(
             <div > 
-
+                <ButtonAppBar />
                 <div className = "container">
                     <MuiThemeProvider>
                         <SearchBar

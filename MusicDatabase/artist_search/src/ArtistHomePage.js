@@ -2,9 +2,8 @@ import React, {Component} from 'react';
 import ArtistHomePageTopCard from './ArtistHomePageTopCard';
 import axios from "axios";
 import AlbumCards from "./AlbumCards";
-
-const album_search_url = "http://www.theaudiodb.com/api/v1/json/1/searchalbum.php?s=";
-const artist_search_url = "http://www.theaudiodb.com/api/v1/json/1/search.php?s=";
+import ButtonAppBar from './ConstantFunctions/AppBar';
+import config from './ConstantFunctions/config'
 
 class ArtistHomePage extends Component{
 
@@ -15,25 +14,31 @@ class ArtistHomePage extends Component{
             artist_data : "",
             albums_data : "",
             wide_image_url : "",
-            artist_summary : ""
+            artist_summary : "",
+            followers : "",
+            genre : "",
+            name : ""
         }
     }
     componentDidMount(){
         var self = this;
 
-        axios.get(artist_search_url + this.props.match.params.artistName)
+        axios.get(config.artist_search_url + this.props.match.params.artistName)
         .then(function (response) {
-            console.log(response.data.artists[0].strArtistBanner);
+            console.log(response);
 
             self.setState({artist_data : response.data.artists[0].strBiographyEN})
-            self.setState({wide_image_url : response.data.artists[0].strArtistBanner})
+            self.setState({wide_image_url : response.data.artists[0].strArtistThumb})
+            self.setState({followers : response})
+            self.setState({genre : response.data.artists[0].strGenre})
+            self.setState({name : response.data.artists[0].strArtist})
         })
         .catch(function (error) {
             console.log(error);
         });
 
 
-        axios.get(album_search_url + this.props.match.params.artistName)
+        axios.get(config.album_search_url + this.props.match.params.artistName)
         .then(function (response) {
             console.log(response.data.album);
 
@@ -43,15 +48,16 @@ class ArtistHomePage extends Component{
             console.log(error);
         });
 
-        console.log(this.state.wide_image_url)
+        //console.log(this.state.wide_image_url)
     }
     render(){
         return(
 
             <div>
+                <ButtonAppBar/>
                 <div>
                 {this.state.wide_image_url ? 
-                    <ArtistHomePageTopCard imgURL = {this.state.wide_image_url} />
+                    <ArtistHomePageTopCard imgURL = {this.state.wide_image_url} genre = {this.state.genre} name = {this.state.name} followers = {this.state.followers}/>
                     :
                     ""
                 }
@@ -63,7 +69,6 @@ class ArtistHomePage extends Component{
                      <AlbumCards data = {this.state.albums_data}/>
                      :
                      ""
-
                 }
                    
                 </div>
