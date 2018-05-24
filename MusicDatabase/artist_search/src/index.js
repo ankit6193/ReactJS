@@ -6,6 +6,11 @@ import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter,Switch,Route } from 'react-router-dom';
 import ArtistHomePage from './ArtistHomePage';
 
+// Uses ReactRouter to handle URL changes 
+
+// Switch works like switch case and matches string and based on that redirects to components
+
+// All component will be rendered on root div of index.html
 
 ReactDOM.render((
     <BrowserRouter>
@@ -17,4 +22,6 @@ ReactDOM.render((
     </Switch>
     </BrowserRouter>),
 document.getElementById('root'));
+
+
 registerServiceWorker();

@@ -4,7 +4,12 @@
     justify-content: center;
     margin-top: 18px
 }
-
+.error{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 180px
+}
 .child{
     max-width: 50%;
 }

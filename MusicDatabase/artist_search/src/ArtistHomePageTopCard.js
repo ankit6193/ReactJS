@@ -1,3 +1,5 @@
+//Additional class to handle top card where artist follower count and image should be shown
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -5,6 +7,8 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 
+
+//common styles
 
 const styles = {
   container : {
@@ -29,6 +33,8 @@ const styles = {
     
   }
 };
+
+// displays name,image and genre of artist
 
 function ArtistHomePageTopCard(props) {
   const { classes } = props;

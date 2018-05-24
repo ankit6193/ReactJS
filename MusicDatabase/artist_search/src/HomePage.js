@@ -1,3 +1,6 @@
+// Landing Page of the app is HomePage component
+
+
 import React, {Component} from 'react';
 import SearchBar from 'material-ui-search-bar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -8,6 +11,8 @@ import Button from '@material-ui/core/Button';
 import ButtonAppBar from './ConstantFunctions/AppBar';
 import config from './ConstantFunctions/config';
 
+
+// It calls Artist Card component if search results are there
 
 class HomePage extends Component {
 
@@ -21,10 +26,14 @@ class HomePage extends Component {
         }
     }
 
+    //handle change in searchbar
+
     onSearchBarChange = (e) => {
         this.setState({searchText : e})
     }
 
+    // making api call when user ENTER or Clicks
+    
     onSearchClicked = () => {
 
         var self = this;
@@ -66,7 +75,10 @@ class HomePage extends Component {
                 {this.state.data ? 
                     <ArtistCard data = {this.state.data}/>
                     :
-                    ""
+
+                    <div className = "error">
+                        Sorry we did not find anything related to your search
+                    </div>
                 }
                 
             </div>

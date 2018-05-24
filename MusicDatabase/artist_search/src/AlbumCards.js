@@ -1,3 +1,9 @@
+// Album Cards class deals with the card on artist home page
+// where all details related to albums are shown
+
+
+
+
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -22,6 +28,9 @@ import config from './ConstantFunctions/config';
 import {millisToMinutesAndSeconds} from './ConstantFunctions/MStoMinutesSeconds'
 
 
+ // Custom Styles for Table cell 
+
+
 const CustomTableCell = withStyles(theme => ({
   head: {
     backgroundColor: theme.palette.common.black,
@@ -31,6 +40,9 @@ const CustomTableCell = withStyles(theme => ({
     fontSize: 14,
   },
 }))(TableCell);
+
+
+// Common styles 
 
 const styles = theme => ({
 
@@ -81,9 +93,12 @@ class AlbumCards extends Component{
         }
     }
 
+    //helper method for pagination
+
     handleChangePage = (event, page) => {
         this.setState({ page });
     };
+
 
     handleChangeRowsPerPage = event => {
         this.setState({ rowsPerPage: event.target.value });
@@ -115,6 +130,10 @@ class AlbumCards extends Component{
     handleClose = () => {
         this.setState({ open: false });
     };
+
+
+    // inside render function a Table is bieng rendered with data from API call 
+    // data is passed as props 
 
     render(){
         const { fullScreen } = this.props;
@@ -249,6 +268,8 @@ class AlbumCards extends Component{
         )
     }
 }
+
+
 AlbumCards.propTypes = {
   classes: PropTypes.object.isRequired,
 };

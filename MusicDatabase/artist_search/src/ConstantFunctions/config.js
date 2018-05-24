@@ -1,3 +1,6 @@
+// Common URL's for making API calls
+
+
 var config = {   
     "song_search_url" : "http://www.theaudiodb.com/api/v1/json/1/track.php?m=",
     "album_search_url" : "http://www.theaudiodb.com/api/v1/json/1/searchalbum.php?s=",

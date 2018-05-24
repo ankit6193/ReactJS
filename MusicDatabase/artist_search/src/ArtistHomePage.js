@@ -1,3 +1,5 @@
+// After selecting view albums in main page . This will be called
+
 import React, {Component} from 'react';
 import ArtistHomePageTopCard from './ArtistHomePageTopCard';
 import axios from "axios";
@@ -20,12 +22,18 @@ class ArtistHomePage extends Component{
             name : ""
         }
     }
+
+    // API call is bieng made in componentDidMount to handle repeated or missed API call
+
     componentDidMount(){
         var self = this;
 
+
+        //gets artist details
+
         axios.get(config.artist_search_url + this.props.match.params.artistName)
         .then(function (response) {
-            console.log(response);
+            //console.log(response);
 
             self.setState({artist_data : response.data.artists[0].strBiographyEN})
             self.setState({wide_image_url : response.data.artists[0].strArtistThumb})
@@ -37,11 +45,10 @@ class ArtistHomePage extends Component{
             console.log(error);
         });
 
-
+        //gets artist's albums
         axios.get(config.album_search_url + this.props.match.params.artistName)
         .then(function (response) {
-            console.log(response.data.album);
-
+            //console.log(response.data.album);
             self.setState({albums_data : response.data.album})
         })
         .catch(function (error) {
@@ -50,6 +57,7 @@ class ArtistHomePage extends Component{
 
         //console.log(this.state.wide_image_url)
     }
+    
     render(){
         return(
 

@@ -1,3 +1,6 @@
+// ArtistCard component is the one that pops up when someone hits a query in home page
+
+
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -16,13 +19,16 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 
 
+
+//common styles
+
 const styles = theme => ({
 
   container : {
     display : 'flex',
     flexDirection : 'column',
-    justifyContent: 'center', /* center items vertically, in this case */
-    alignItems: 'center',     /* center items horizontally, in this case */
+    justifyContent: 'center', 
+    alignItems: 'center',     
     paddingTop : '40px'
   },
   card: {
@@ -80,9 +86,14 @@ class ArtistCard extends Component{
         };
     }
 
+    
     onClick = (e) =>{
+        // e is artist name 
+        // onClick implements React Router functionality this will redirect to artist home page
         this.props.history.push("/home/" + e);
     }
+
+    //pagination helper methods 
 
     handleChangePage = (event, page) => {
         this.setState({ page });
@@ -91,6 +102,10 @@ class ArtistCard extends Component{
     handleChangeRowsPerPage = event => {
         this.setState({ rowsPerPage: event.target.value });
     };
+
+
+    // Renders cards as table row based on search result 
+
     render() {
     const { classes } = this.props;
     const { data, rowsPerPage, page } = this.state;
@@ -168,6 +183,7 @@ ArtistCard.propTypes = {
   theme: PropTypes.object.isRequired,
 };
 
-//export default    withRouter(withStyles(styles, { withTheme: true })(ArtistCard));
+
+//withRouter detects change in URl and appropiately select path in index.js
 
 export default withRouter(withStyles(styles)(ArtistCard));
