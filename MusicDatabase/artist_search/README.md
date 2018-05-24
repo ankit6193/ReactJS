@@ -24,6 +24,10 @@ Home page of artist will show you several information about the albums and relea
 - src directory contains all the app related code. Under which there is a seperate directory for Constant Functions which is used at several places like config.json which contains API URL's.
 - index.js is the entry point and it redirects to pages based on URL using React Router
 
+## Project Components 
+
+Majority of components are used from Google Material UI design (https://material-ui.com/) and are responsive. Code which is useful are taken exactly from the website and modified as per requirement.
+
 ## Comments and Explaination
 
 Most of the code is commented with the use where ever possible
