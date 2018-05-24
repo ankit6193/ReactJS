@@ -22,7 +22,8 @@ class HomePage extends Component {
         this.state = {
             searchText : "",
             thumbImageURL : "",
-            data : ""
+            data : "",
+            message : "If matched search Results will show up here"
         }
     }
 
@@ -33,7 +34,7 @@ class HomePage extends Component {
     }
 
     // making api call when user ENTER or Clicks
-    
+
     onSearchClicked = () => {
 
         var self = this;
@@ -77,7 +78,7 @@ class HomePage extends Component {
                     :
 
                     <div className = "error">
-                        Sorry we did not find anything related to your search
+                        {this.state.message}
                     </div>
                 }
                 
